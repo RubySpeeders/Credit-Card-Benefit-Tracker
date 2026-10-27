@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import BenefitItem from "./components/BenefitItem";
+import CardDisplay from "./components/CardDisplay";
 
 export default function Home() {
   return (
@@ -15,13 +16,28 @@ export default function Home() {
           height={20}
           priority
         />
-        <BenefitItem benefit={{
-        "id": "csp-hotel",
-        "title": "$100 Chase Travel Hotel Credit",
-        "monetary_value": 100,
+        <CardDisplay card={  {
+    "id": "chase-sapphire-reserve",
+    "name": "Chase Sapphire Reserve",
+    "issuer": "Chase",
+    "annual_fee": 795,
+    "benefits": [
+      {
+        "id": "csr-travel",
+        "title": "$300 Annual Travel Credit",
+        "monetary_value": 300,
         "reset_interval": "annually",
-        "description": "Annual credit for hotel bookings made through Chase Travel."
-      }} isUsed={false} onToggle={()=>console.log('hi')}/>
+        "description": "Automatically applied to eligible travel purchases each account anniversary year."
+      },
+      {
+        "id": "csr-dining",
+        "title": "$300 Dining Credit",
+        "monetary_value": 300,
+        "reset_interval": "semi-annually",
+        "description": "Up to $150 per half-year via Sapphire Exclusive Table restaurants."
+      }
+    ]
+  }}/>
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
           <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
             To get started, edit the{" "}
