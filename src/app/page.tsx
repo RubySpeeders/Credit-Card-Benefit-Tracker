@@ -2,19 +2,12 @@
 
 import Image from "next/image";
 import DesktopView from "./components/DesktopView";
+import MobileView from "./components/MobileView";
 
 export default function Home() {
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
         <DesktopView cards={[{
     "id": "chase-sapphire-reserve",
     "name": "Chase Sapphire Reserve",
@@ -65,6 +58,56 @@ export default function Home() {
       }
     ]
   }]}/>
+  <MobileView cards={[{
+    "id": "chase-sapphire-reserve",
+    "name": "Chase Sapphire Reserve",
+    "issuer": "Chase",
+    "annual_fee": 795,
+    "benefits": [
+      {
+        "id": "csr-travel",
+        "title": "$300 Annual Travel Credit",
+        "monetary_value": 300,
+        "reset_interval": "annually",
+        "description": "Automatically applied to eligible travel purchases each account anniversary year."
+      },
+      {
+        "id": "csr-dining",
+        "title": "$300 Dining Credit",
+        "monetary_value": 300,
+        "reset_interval": "semi-annually",
+        "description": "Up to $150 per half-year via Sapphire Exclusive Table restaurants."
+      }
+    ]
+  }, {
+    "id": "amex-platinum",
+    "name": "The Platinum Card from American Express",
+    "issuer": "American Express",
+    "annual_fee": 895,
+    "benefits": [
+      {
+        "id": "amex-plat-uber",
+        "title": "$200 Uber Cash",
+        "monetary_value": 200,
+        "reset_interval": "monthly",
+        "description": "Up to $15 per month, plus a $20 bonus in December."
+      },
+      {
+        "id": "amex-plat-resy",
+        "title": "$400 Resy Credit",
+        "monetary_value": 400,
+        "reset_interval": "quarterly",
+        "description": "Up to $100 per quarter on eligible Resy restaurant purchases."
+      },
+      {
+        "id": "amex-plat-hotel",
+        "title": "$600 Hotel Credit",
+        "monetary_value": 600,
+        "reset_interval": "semi-annually",
+        "description": "Up to $300 semi-annually on prepaid Fine Hotels + Resorts or The Hotel Collection via Amex Travel."
+      }
+    ]
+  }]} />
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
           <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
             To get started, edit the{" "}
