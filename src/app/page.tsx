@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import BenefitItem from "./components/BenefitItem";
-import CardDisplay from "./components/CardDisplay";
+import DesktopView from "./components/DesktopView";
 
 export default function Home() {
   return (
@@ -16,7 +15,7 @@ export default function Home() {
           height={20}
           priority
         />
-        <CardDisplay card={  {
+        <DesktopView cards={[{
     "id": "chase-sapphire-reserve",
     "name": "Chase Sapphire Reserve",
     "issuer": "Chase",
@@ -37,7 +36,35 @@ export default function Home() {
         "description": "Up to $150 per half-year via Sapphire Exclusive Table restaurants."
       }
     ]
-  }}/>
+  }, {
+    "id": "amex-platinum",
+    "name": "The Platinum Card from American Express",
+    "issuer": "American Express",
+    "annual_fee": 895,
+    "benefits": [
+      {
+        "id": "amex-plat-uber",
+        "title": "$200 Uber Cash",
+        "monetary_value": 200,
+        "reset_interval": "monthly",
+        "description": "Up to $15 per month, plus a $20 bonus in December."
+      },
+      {
+        "id": "amex-plat-resy",
+        "title": "$400 Resy Credit",
+        "monetary_value": 400,
+        "reset_interval": "quarterly",
+        "description": "Up to $100 per quarter on eligible Resy restaurant purchases."
+      },
+      {
+        "id": "amex-plat-hotel",
+        "title": "$600 Hotel Credit",
+        "monetary_value": 600,
+        "reset_interval": "semi-annually",
+        "description": "Up to $300 semi-annually on prepaid Fine Hotels + Resorts or The Hotel Collection via Amex Travel."
+      }
+    ]
+  }]}/>
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
           <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
             To get started, edit the{" "}
