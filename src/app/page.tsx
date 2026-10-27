@@ -1,8 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import BenefitItem from "./components/BenefitItem";
-import CardDisplay from "./components/CardDisplay";
 import DesktopView from "./components/DesktopView";
 
 export default function Home() {
