@@ -1,20 +1,19 @@
-import React from 'react';
-import DesktopView from './components/DesktopView';
-import MobileView from "./components/MobileView";
+import DesktopView from '../app/components/DesktopView';
+import MobileView from '../app/components/MobileView';
+import { prisma } from '@/lib/prisma';
 
-// Import the hardcoded card data you saved earlier
-import cardsData from './data/cards.json';
+export const instant = false;
 
-export default function Home() {
-  // Cast the imported JSON to our expected type for TypeScript
-  // In Phase 2, this will be replaced by a database fetch
-  const cards = cardsData as any; 
+export default async function Home() {
+  const cards = await prisma.card.findMany({
+    include: {
+      benefits: true,
+    },
+  });
 
   return (
     <main className="min-h-screen bg-gray-100 py-12 px-4 font-sans">
       <div className="max-w-7xl mx-auto">
-        
-        {/* Page Header */}
         <header className="mb-10 text-center">
           <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
             Benefit Tracker
@@ -24,14 +23,8 @@ export default function Home() {
           </p>
         </header>
 
-        {/* 
-          Responsive Layouts 
-          Both are rendered, but Tailwind CSS handles the visibility:
-          DesktopView is hidden on mobile, MobileView is hidden on desktop.
-        */}
         <DesktopView cards={cards} />
         <MobileView cards={cards} />
-
       </div>
     </main>
   );

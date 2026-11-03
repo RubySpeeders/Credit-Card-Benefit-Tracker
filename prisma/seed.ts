@@ -10,6 +10,10 @@ const prisma = new PrismaClient({adapter});
 
 async function main() {
   console.log('Start seeding...');
+
+  await prisma.userBenefitUsage.deleteMany();
+  await prisma.benefit.deleteMany();
+  await prisma.card.deleteMany();
   
   for (const card of cardsData) {
     await prisma.card.create({
@@ -24,6 +28,7 @@ async function main() {
             title: benefit.title,
             monetary_value: benefit.monetary_value,
             reset_interval: benefit.reset_interval,
+            description: benefit.description,
           })),
         },
       },
