@@ -1,0 +1,87 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// --------------------------------------
+// CORE TABLES
+// --------------------------------------
+
+model User {
+  id         String     @id @default(uuid())
+  email      String     @unique
+  created_at DateTime   @default(now()) //
+  
+  userCards  UserCard[]
+}
+
+model Card {
+  id             String         @id @default(uuid())
+  name           String         //[cite: 1]
+  issuer         String         //[cite: 1]
+  annual_fee     Int            //[cite: 1]
+  image_url      String?        //[cite: 1]
+  
+  benefits       Benefit[]
+  userCards      UserCard[]
+  cardRewards    CardReward[]
+}
+
+model Benefit {
+  id             String         @id @default(uuid())
+  card_id        String         //[cite: 1]
+  title          String         //[cite: 1]
+  monetary_value Int            //[cite: 1]
+  reset_interval String         // e.g., monthly, quarterly, annual[cite: 1]
+  
+  card           Card           @relation(fields: [card_id], references: [id])
+  usages         UserBenefitUsage[]
+}
+
+model UserCard {
+  id         String     @id @default(uuid())
+  user_id    String     //[cite: 1]
+  card_id    String     //[cite: 1]
+  open_date  DateTime   // critical for tracking anniversary-based resets[cite: 1]
+  
+  user       User       @relation(fields: [user_id], references: [id])
+  card       Card       @relation(fields: [card_id], references: [id])
+  usages     UserBenefitUsage[]
+}
+
+model UserBenefitUsage {
+  id           String   @id @default(uuid())
+  user_card_id String   //[cite: 1]
+  benefit_id   String   //[cite: 1]
+  used_date    DateTime @default(now()) //[cite: 1]
+  amount_saved Int      //[cite: 1]
+  
+  userCard     UserCard @relation(fields: [user_card_id], references: [id])
+  benefit      Benefit  @relation(fields: [benefit_id], references: [id])
+}
+
+// --------------------------------------
+// STRETCH GOAL TABLES (Recommendation Engine)
+// --------------------------------------
+
+model RewardCategory {
+  id          String       @id @default(uuid())
+  name        String       // e.g., dining, travel[cite: 1]
+  
+  cardRewards CardReward[]
+}
+
+model CardReward {
+  id          String         @id @default(uuid())
+  card_id     String
+  category_id String
+  multiplier  Float          // e.g., 3.0 for 3x points[cite: 1]
+  
+  card        Card           @relation(fields: [card_id], references: [id])
+  category    RewardCategory @relation(fields: [category_id], references: [id])
+}
