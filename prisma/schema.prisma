@@ -1,7 +1,7 @@
 // prisma/schema.prisma
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
 }
 
 datasource db {
@@ -37,7 +37,8 @@ model Benefit {
   card_id        String         //[cite: 1]
   title          String         //[cite: 1]
   monetary_value Int            //[cite: 1]
-  reset_interval String         // e.g., monthly, quarterly, annual[cite: 1]
+  reset_interval String         // e.g., monthly, quarterly, annual[cite: 1]         
+  description    String         @default("")
   
   card           Card           @relation(fields: [card_id], references: [id])
   usages         UserBenefitUsage[]
