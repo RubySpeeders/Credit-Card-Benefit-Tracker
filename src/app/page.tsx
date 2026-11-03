@@ -1,7 +1,8 @@
-import React from 'react';
 import DesktopView from '../app/components/DesktopView';
 import MobileView from '../app/components/MobileView';
 import { prisma } from '@/lib/prisma';
+
+export const instant = false;
 
 export default async function Home() {
   const cards = await prisma.card.findMany({
