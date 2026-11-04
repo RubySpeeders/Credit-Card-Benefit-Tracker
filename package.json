@@ -10,6 +10,7 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@clerk/nextjs": "^7.9.24",
     "@prisma/adapter-pg": "^7.10.1",
     "dotenv": "^18.0.9",
     "next": "16.4.3",

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import CardDisplay, { Card } from './CardDisplay';
 
 interface DesktopViewProps {
