@@ -2,8 +2,8 @@ import { Suspense } from 'react';
 import { currentUser } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
-import WalletManager from './WalletManager';
 import Loading from './loading';
+import WalletManager from './WalletManager';
 
 // We extract the data fetching into its own asynchronous component
 async function WalletDataFetcher() {
@@ -46,7 +46,7 @@ export default function WalletPage() {
             Select the cards you currently own to track their benefits.
           </p>
         </header>
-        
+
         <Suspense fallback={<Loading />}>
           <WalletDataFetcher />
         </Suspense>
