@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Card } from '@prisma/client';
+import { saveWalletSelections } from '../actions/wallet';
 
 interface WalletManagerProps {
   allCards: Card[];
@@ -25,9 +26,16 @@ export default function WalletManager({ allCards, initialOwnedIds, userId }: Wal
 
   const handleSave = async () => {
     setIsSaving(true);
-    // TODO: We will build the Server Action for this in Phase 4!
-    console.log("Saving these card IDs to database:", Array.from(selectedIds));
-    setTimeout(() => setIsSaving(false), 1000); 
+    try {
+      // Convert the Set to an Array and send it to your Postgres database
+      await saveWalletSelections(Array.from(selectedIds));
+      alert("Wallet saved successfully!"); 
+    } catch (error) {
+      console.error("Failed to save wallet:", error);
+      alert("Something went wrong.");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
